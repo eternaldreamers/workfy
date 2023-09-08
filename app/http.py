@@ -1,6 +1,6 @@
 from flask import Flask
 from app.config import vars
-from .views import IndexView, WebhookView
+from .endpoints import IndexView, WebhookView
 
 app = Flask(__name__)
 
