@@ -1,3 +1,3 @@
-from eventemitter import EventEmitter
+from pyee.base import EventEmitter
 
 emitter = EventEmitter()

@@ -13,15 +13,12 @@ class Bot(commands.Bot):
         super().__init__(command_prefix="?", intents=intents)
 
     async def on_ready(self):
-        print("ready!!!")
-
-        def on_message(message):
-            print("df")
-            # if self.is_ready():
-            #     channel = self.get_channel(vars.DISCORD_CHANEL_ID)
-            #     await channel.send(message)
-
-            emitter.on(EVENT_WEBHOOK, on_message)
+        @emitter.on(EVENT_WEBHOOK)
+        async def on_message(*args, **kwargs):
+            print(f"xxxxyy")
+            if self.is_ready():
+                channel = self.get_channel(vars.DISCORD_CHANEL_ID)
+                # await channel.send("message")
 
 async def setup():
     client = Bot()

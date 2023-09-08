@@ -1,4 +1,4 @@
 Flask==2.3.3
 python-dotenv==1.0.0
 discord==2.3.2
-eventemitter==0.2.0
+pyee==11.0.0
