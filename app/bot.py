@@ -12,14 +12,14 @@ class Bot(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix="?", intents=intents)
         
-    def on_message(self, *args, **kwargs):
+    def on_message_event(self, *args, **kwargs):
         if self.is_ready():
             channel = self.get_channel(vars.DISCORD_CHANEL_ID)
             self.loop.create_task(channel.send("message"))
 
     async def on_ready(self):
         print("Bot is ready!")
-        emitter.on(EVENT_WEBHOOK, self.on_message)
+        emitter.on(EVENT_WEBHOOK, self.on_message_event)
 
 async def setup():
     client = Bot()
