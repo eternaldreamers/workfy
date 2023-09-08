@@ -1,0 +1,9 @@
+**/**/__pycache__
+docker
+.venv
+.git
+.gitignore
+.env
+.env.example
+.python-version
+README.md
