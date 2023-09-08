@@ -5,7 +5,7 @@ services:
     ports:
       - "7000:4000"
     environment:
-      - DISCORD_TOKEN=MTE0OTc5MzI4NjA2ODg5OTkzMA.Gedqnz.09dIjfav1Rm6dlQoaWsusQyeK9zs3jwvn43duY
+      - DISCORD_TOKEN=
       - DISCORD_CHANEL_ID=1149794869636780122
       - HTTP_PORT=4000
       
