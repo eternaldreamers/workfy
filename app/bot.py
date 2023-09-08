@@ -13,7 +13,6 @@ class Bot(commands.Bot):
         super().__init__(command_prefix="?", intents=intents)
         
     def on_message(self, *args, **kwargs):
-        print(f"xxxxyy")
         if self.is_ready():
             channel = self.get_channel(vars.DISCORD_CHANEL_ID)
             self.loop.create_task(channel.send("message"))
