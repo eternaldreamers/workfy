@@ -6,6 +6,7 @@ services:
       - "7000:4000"
     environment:
       - DISCORD_TOKEN=
-      - DISCORD_CHANEL_ID=1149794869636780122
+      - DISCORD_CHANEL_ID=
+      - ASANA_TOKEN=
       - HTTP_PORT=4000
       
