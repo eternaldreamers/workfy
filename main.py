@@ -1,20 +1,20 @@
 import asyncio
-import threading
 
-from app.http import setup as setup_http
+from app.http import app as flask_app
 from app.bot import setup as setup_bot
+from app.config import vars
 
-def thread_func():
-  loop = asyncio.new_event_loop()
-  asyncio.set_event_loop(loop)
-  loop.run_until_complete(setup_bot())
-  loop.close()
+def start_flask_app():
+    flask_app.run(host='0.0.0.0', port=vars.HTTP_PORT)
 
 async def main():
-  thread = threading.Thread(target=thread_func)
-  thread.start()
+    loop = asyncio.get_event_loop()
 
-  await setup_http()
+    # Inicia el bot de discord en el loop actual
+    loop.create_task(setup_bot())
+
+    # Ejecuta Flask en el mismo loop
+    await loop.run_in_executor(None, start_flask_app)
 
 if __name__ == "__main__":
-  asyncio.run(main())
+    asyncio.run(main())

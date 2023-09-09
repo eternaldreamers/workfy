@@ -11,14 +11,16 @@ intents = discord.Intents.all()
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix="?", intents=intents)
+        
+    def on_message(self, *args, **kwargs):
+        print(f"xxxxyy")
+        if self.is_ready():
+            channel = self.get_channel(vars.DISCORD_CHANEL_ID)
+            self.loop.create_task(channel.send("message"))
 
     async def on_ready(self):
-        @emitter.on(EVENT_WEBHOOK)
-        async def on_message(*args, **kwargs):
-            print(f"xxxxyy")
-            if self.is_ready():
-                channel = self.get_channel(vars.DISCORD_CHANEL_ID)
-                # await channel.send("message")
+        print("Bot is ready!")
+        emitter.on(EVENT_WEBHOOK, self.on_message)
 
 async def setup():
     client = Bot()
