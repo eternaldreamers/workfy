@@ -17,6 +17,7 @@ class WebhookView(MethodView):
 
         if len(events):
             current_event = events[0]
+            action = current_event['action']
             resource = current_event['resource']
             gid = resource['gid']
 
@@ -33,12 +34,16 @@ class WebhookView(MethodView):
                     break
 
             payload = {
+                "action": action,
                 "due_at": res_data.get("due_at"),
                 "due_on": res_data.get("due_on"),
                 "name": res_data.get("name"),
                 "notes": res_data.get("notes"),
                 "points": points_value
             }
+
+            print("Send Payload!!!")
+            print(payload)
 
             emitter.emit(EVENT_WEBHOOK, payload)
 

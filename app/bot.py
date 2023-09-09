@@ -1,6 +1,7 @@
 import os
 import discord
 import asyncio
+import json
 from discord.ext import commands
 from app.config import vars
 from app.config.constants import EVENT_WEBHOOK
@@ -15,7 +16,8 @@ class Bot(commands.Bot):
     def on_message_event(self, message):
         if self.is_ready():
             channel = self.get_channel(vars.DISCORD_CHANEL_ID)
-            self.loop.create_task(channel.send(message))
+            json_str = json.dumps(message, sort_keys=True, indent=4)
+            self.loop.create_task(channel.send(f"```json\n{json_str}```"))
 
     async def on_ready(self):
         print("Bot is ready!")
