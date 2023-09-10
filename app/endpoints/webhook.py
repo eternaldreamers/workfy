@@ -21,16 +21,23 @@ class WebhookView(MethodView):
             gid = resource['gid']
 
             res = requests.get(f'https://app.asana.com/api/1.0/tasks/{gid}', headers={ 'Authorization': f'Bearer {ASANA_TOKEN}' })
-            res_data = res.json()
+            res_data = res.json().get('data', {})
 
             print("Query Tasks!!!")
             print(res_data)
 
+            points_value = None
+            for field in res_data.get('custom_fields', []):
+                if field.get('name') == 'Points':
+                    points_value = field.get('number_value')
+                    break
+
             payload = {
-                "due_at": res_data["due_at"],
-                "due_on": res_data["due_on"],
-                "name": res_data["name"],
-                "notes": res_data["notes"]
+                "due_at": res_data.get("due_at"),
+                "due_on": res_data.get("due_on"),
+                "name": res_data.get("name"),
+                "notes": res_data.get("notes"),
+                "points": points_value
             }
 
             emitter.emit(EVENT_WEBHOOK, payload)
@@ -39,6 +46,3 @@ class WebhookView(MethodView):
         response.headers["X-Hook-Secret"] = hook_secret
 
         return response
-
-
-
