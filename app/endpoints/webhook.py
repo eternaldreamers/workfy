@@ -13,9 +13,9 @@ class WebhookView(MethodView):
         print("Listen Webhook!!!")
         print(data)
 
-        events = data['events']
+        events = data.get('events')
 
-        if len(events):
+        if events:
             current_event = events[0]
             action = current_event['action']
             resource = current_event['resource']
