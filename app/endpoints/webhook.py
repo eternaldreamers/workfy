@@ -13,7 +13,7 @@ class WebhookView(MethodView):
         print("Listen Webhook!!!")
         print(data)
 
-        events = data.get('events')
+        events = data.get('events', [])
 
         if events:
             current_event = events[0]
