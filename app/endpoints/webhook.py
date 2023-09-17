@@ -34,6 +34,8 @@ class WebhookView(MethodView):
                     break
 
             payload = {
+                "logo": f"{request.url_root}images/asana.png",
+                "assignee": res_data.get('assignee') and res_data.get('assignee').get('name'),
                 "action": action,
                 "due_at": res_data.get("due_at"),
                 "due_on": res_data.get("due_on"),
